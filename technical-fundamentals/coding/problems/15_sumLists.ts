@@ -19,4 +19,29 @@ export type Node<T> = {
 export default function sumLists(
   list1: Node<number> | undefined,
   list2: Node<number> | undefined,
-): Node<number> | undefined {}
+): Node<number> | undefined {
+  // create two lists
+  const li1 = new LinkedList<number>(list1)
+  const li2 = new LinkedList<number>(list2)
+
+  const arr1:[number?] = []
+  const arr2:[number?] = []
+
+  // populate both arrays
+  li1.visit((node) => { arr1.unshift(node.value) })
+  li2.visit((node) => { arr2.unshift(node.value) })
+
+  const sum = Number(arr1.join("")) + Number(arr2.join(""))
+
+  const sumList = new LinkedList<number>()
+
+  sum
+    .toString()
+    .split("")
+    .reverse()
+    .forEach(num => {
+      sumList.push(Number(num))
+    })
+
+  return sumList.head
+}
